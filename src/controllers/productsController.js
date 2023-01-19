@@ -10,7 +10,13 @@ const getProduct = async (req, res) => {
   res.status(status).json(response);
 };
 
+const reqProduct = async (req, res) => {
+  const { status, response } = await productsService.reqProduct(req);
+  res.status(status).json(response);
+};
+
 module.exports = {
   getAll,
   getProduct,
+  reqProduct,
 };

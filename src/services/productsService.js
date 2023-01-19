@@ -12,7 +12,15 @@ const getProduct = async (req) => {
   return { status: 200, response: products };
 };
 
+const reqProduct = async (req) => {
+  const { name } = req.body;
+  const request = { name };
+  const id = await productsModel.postRequest(request);
+  return { status: 201, response: { ...request, id } };
+};
+
 module.exports = {
   getAll,
   getProduct,
+  reqProduct,
 };
