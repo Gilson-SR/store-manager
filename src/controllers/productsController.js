@@ -5,12 +5,12 @@ const getAllProducts = async (req, res) => {
   res.status(status).json(response);
 };
 
-const getProduct = async (req, res) => {
-  const { status, response } = await productsService.getProduct(req);
+const getOneProduct = async (req, res) => {
+  const { status, response } = await productsService.getOneProduct(req);
   res.status(status).json(response);
 };
 
 module.exports = {
   getAllProducts,
-  getProduct,
+  getOneProduct,
 };

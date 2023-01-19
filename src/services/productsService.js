@@ -1,12 +1,12 @@
-const { productsModel } = require('../models/productsModel');
+const { productsModel } = require('../models');
 
 const getAllProducts = async () => {
-  const products = await productsModel.getAllProducts();
+  const products = await productsModel.getAll();
   return { status: 200, response: products };
 };
 
-const getProduct = async (request) => {
-  const { id } = request.params;
+const getOneProduct = async (req) => {
+  const { id } = req.params;
   const products = await productsModel.getById(id);
   if (!products) return { status: 404, response: { message: 'Product not found' } };
   return { status: 200, response: products };
@@ -14,5 +14,5 @@ const getProduct = async (request) => {
 
 module.exports = {
   getAllProducts,
-  getProduct,
+  getOneProduct,
 };
