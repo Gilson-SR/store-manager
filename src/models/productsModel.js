@@ -1,11 +1,11 @@
 const connection = require('./connection');
 
 const getAll = async () => {
-    const sqlQuery = `
+    const dbQuery = `
       SELECT *
       FROM StoreManager.products;
     `;
-    const [products] = await connection.query(sqlQuery);
+    const [products] = await connection.query(dbQuery);
     return products;
 };
 
