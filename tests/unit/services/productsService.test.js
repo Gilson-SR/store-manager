@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const { mockGetAll, mockGetProduct } = require("../mocks/mockProducts");
 
 const { productsModel } = require("../../../src/models");
-const { getAll, getProduct } = require("../../../src/services/productService");
+const { getAll, getProduct, reqProduct } = require("../../../src/services/productService");
 
 describe('Test productsServices', () => {
 	describe('Test 1', () => {
@@ -42,7 +42,21 @@ describe('Test productsServices', () => {
         .resolves(undefined);
 
       await getProduct(req);
-		})
+    })
+  })
+
+  describe('Test 3', () => {
+    it('', async () => {
+      const req = {
+        body: { name: 'Product X' },
+      };
+
+      sinon
+        .stub(productsModel, 'postRequest')
+        .resolves(1);
+
+      await reqProduct(req);
+    })
 	})
   afterEach(sinon.restore);
 })
