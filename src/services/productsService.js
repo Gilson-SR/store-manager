@@ -1,4 +1,5 @@
 const { productsModel } = require('../models');
+const { postProductValidation } = require('./validations/productsValidation');
 
 const getAll = async () => {
   const products = await productsModel.getAll();
@@ -14,6 +15,8 @@ const getProduct = async (req) => {
 
 const reqProduct = async (req) => {
   const { name } = req.body;
+  const responseValidation = postProductValidation(name);
+  if (responseValidation) return responseValidation;
   const request = { name };
   const id = await productsModel.postRequest(request);
   return { status: 201, response: { ...request, id } };
