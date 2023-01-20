@@ -33,10 +33,10 @@ const checkValidity = (listSales) => {
 
 const checkProduct = async (listSales) => {
   const produtsForSale = await await saleModel.getAllSales();
-  const arrProductsId = produtsForSale.map((e) => e.product_id);
-  const arrPossibleProductsId = listSales.map((e) => e.productId);
-  for (let i = 0; i < arrPossibleProductsId.length; i += 1) {
-    if (!arrProductsId.some((e) => arrPossibleProductsId[i] === e)) {
+  const listProductsId = produtsForSale.map((e) => e.product_id);
+  const possibleProductsId = listSales.map((e) => e.productId);
+  for (let i = 0; i < possibleProductsId.length; i += 1) {
+    if (!listProductsId.some((e) => possibleProductsId[i] === e)) {
       return { status: 404, response: { message: 'Product not found' } };
     }
   }

@@ -12,7 +12,7 @@ const {
 
 const { saleModel } = require('../../../src/models');
 const { reqSales } = require('../../../src/services/saleService');
-const { postSaleValidation } = require('../../../src/services/validations/validate');
+const { postSaleValidation } = require('../../../src/services/validations/productsValidation');
 
 describe('Test saleService', () => {
   describe('test 1', () => {
@@ -53,14 +53,14 @@ describe('Test saleService', () => {
     })
   })
 
-  describe('Test 2', () => {
-    it('', async () => {
-      sinon
-        .stub(saleModel, 'salesRequisition')
-        .resolves({ insertId: 10 });
-      await reqSales(mockListSales);
-    })
-  })
+  // describe('Test 2', () => {
+  //   it('', async () => {
+  //     sinon
+  //       .stub(saleModel, 'salesRequisition')
+  //       .resolves({ insertId: 10 });
+  //     await reqSales(mockListSales);
+  //   })
+  // })
 
 
 

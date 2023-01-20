@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const { mockListSales } = require('../mocks/mockSales');
 
 const { saleService } = require('../../../src/services');
-const { reqSales } = require('../../../src/controllers/saleControler');
+const { reqSales } = require('../../../src/controllers/saleController');
 
 describe('Test saleController', () => {
 	describe('Test 1', () => {
