@@ -1,13 +1,13 @@
-const chai = require("chai");
-const sinon = require("sinon");
+const chai = require('chai');
+const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
 const { expect } = chai;
 chai.use(sinonChai);
 
-const { mockGetAll, mockGetProduct } = require("../mocks/mockProducts");
+const { mockGetAll, mockGetProduct } = require('../mocks/mockProducts');
 
-const { productsModel } = require("../../../src/models");
+const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
 
 describe('Test productsServices', () => {
