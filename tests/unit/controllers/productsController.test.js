@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const { mockGetAll, mockGetProduct } = require("../mocks/mockProducts");
 
 const { productsService } = require("../../../src/services");
-const { getAll, getProduct, reqProduct } = require("../../../src/controllers/productsController");
+const { productsController} = require('../../../src/controllers');
 
 describe('Test productsController', () => {
 	describe('Test 1', () => {
@@ -22,7 +22,7 @@ describe('Test productsController', () => {
         .stub(productsService, 'getAll')
         .resolves({ status: 200, response: mockGetAll });
 
-      await getAll(req, res);
+      await productsController.getAll(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(mockGetAll);
@@ -41,7 +41,7 @@ describe('Test productsController', () => {
         .stub(productsService, 'getProduct')
         .resolves({ status: 200, response: mockGetProduct });
 
-      await getProduct(req, res);
+      await productsController.getProduct(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(mockGetProduct);
@@ -61,7 +61,7 @@ describe('Test productsController', () => {
         .stub(productsService, 'reqProduct')
         .resolves({ status: 201, response: { ...req.body, id: 1 } });
 
-      await reqProduct(req, res);
+      await productsController.reqProduct(req, res);
 		})
     })
 

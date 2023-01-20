@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const { mockGetAll, mockGetProduct } = require("../mocks/mockProducts");
 
 const connection = require("../../../src/models/connection");
-const { getAll, getById, postRequest } = require("../../../src/models/productModel");
+const { productsModel } = require('../../../src/models');
 
 describe('Test productsModels', () => {
 	describe('Test 1', () => {
@@ -17,7 +17,7 @@ describe('Test productsModels', () => {
         .stub(connection, 'execute')
         .resolves(mockGetAll);
 
-      await getAll();
+      await productsModel.getAll();
 		})
   })
 
@@ -27,7 +27,7 @@ describe('Test productsModels', () => {
         .stub(connection, 'execute')
         .resolves([[mockGetProduct]]);
 
-      await getById(1);
+      await productsModel.getById(1);
 		})
 	})
 
@@ -37,7 +37,7 @@ describe('Test productsModels', () => {
         .stub(connection, 'execute')
         .resolves([1]);
 
-      await postRequest({ name: 'Product X' });
+      await productsModel.postRequest({ name: 'Product X' });
 		})
   })
 
