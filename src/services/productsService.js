@@ -29,7 +29,7 @@ const putProduct = async (req) => {
   if (responseValidation) return responseValidation;
   const product = await productsModel.getById(id);
   if (!product) return { status: 404, response: { message: 'Product not found' } };
-  await productsModel.put(name, id);
+  await productsModel.putRequest(name, id);
   return { status: 200, response: { name, id } };
 };
 
