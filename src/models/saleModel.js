@@ -1,5 +1,34 @@
 const connection = require('./connection');
 
+const getAll = async () => {
+  const dbQuery = `
+    SELECT
+    (sp.sale_id) AS saleId,
+    (s.date) AS date,
+    (sp.product_id) AS productId,
+    (sp.quantity) AS quantity
+  FROM StoreManager.sales_products AS sp
+    JOIN StoreManager.sales AS s ON s.id = sp.sale_id
+      ORDER BY sp.sale_id ASC, sp.product_id ASC
+  `;
+  const [sales] = await connection.execute(dbQuery);
+  return sales;
+};
+
+const getById = async (id) => {
+  const dbQuery = `
+    SELECT
+      (s.date) AS date,
+      (sp.product_id) AS productId,
+      (sp.quantity) AS quantity
+    FROM StoreManager.sales_products AS sp
+      JOIN StoreManager.sales AS s ON s.id = sp.sale_id
+        WHERE sp.sale_id = ?
+  `;
+  const [sale] = await connection.execute(dbQuery, [id]);
+  return sale;
+};
+
 const getAllSales = async () => {
   const dbQuery = `
     SELECT *
@@ -36,4 +65,6 @@ const salesRequisition = async (listSales) => {
 module.exports = {
   getAllSales,
   salesRequisition,
+  getAll,
+  getById,
 };

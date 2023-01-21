@@ -10,8 +10,8 @@ const postProductValidation = (parameter) => {
   }
 };
 
-const checkExistence = (listSales) => {
-  for (let i = 0; i < listSales.length; i += 1) {
+const checkExistence = (listSales, listSalesLength) => {
+  for (let i = 0; i < listSalesLength; i += 1) {
     if (!('productId' in listSales[i])) {
       return { status: 400, response: { message: '"productId" is required' } };
     }
@@ -22,7 +22,7 @@ const checkExistence = (listSales) => {
 };
 
 const checkValidity = (listSales) => {
-  for (let i = 0; i < listSales.length; i += 1) {
+  for (let i = 0; i < (listSales && listSales.length); i += 1) {
     if (listSales[i].quantity <= 0) {
       return {
         status: 422, response: { message: '"quantity" must be greater than or equal to 1' },
@@ -31,24 +31,29 @@ const checkValidity = (listSales) => {
   }
 };
 
+const getListProductsForSale = async (listSales) => {
+  const productsForSale = await saleModel.getAllSales();
+  const listProductsId = productsForSale && productsForSale.map((e) => e.product_id);
+  const possibleProductsId = listSales && listSales.map((e) => e.productId);
+  return { listProductsId, possibleProductsId };
+};
+
 const checkProduct = async (listSales) => {
-  const produtsForSale = await await saleModel.getAllSales();
-  const listProductsId = produtsForSale.map((e) => e.product_id);
-  const possibleProductsId = listSales.map((e) => e.productId);
-  for (let i = 0; i < possibleProductsId.length; i += 1) {
+  const { listProductsId, possibleProductsId } = await getListProductsForSale(listSales);
+  for (let i = 0; i < (possibleProductsId && possibleProductsId.length); i += 1) {
     if (!listProductsId.some((e) => possibleProductsId[i] === e)) {
       return { status: 404, response: { message: 'Product not found' } };
     }
   }
 };
 
-const postSaleValidation = (listSales) => {
-  if (checkExistence(listSales)) return checkExistence(listSales);
+const postSaleValidation = (listSales, listSalesLength) => {
+  if (checkExistence(listSales, listSalesLength)) return checkExistence(listSales, listSalesLength);
   if (checkValidity(listSales)) return checkValidity(listSales);
   if (checkProduct(listSales)) return checkProduct(listSales);
 };
 
 module.exports = {
   postProductValidation,
-   postSaleValidation,
+  postSaleValidation,
 };

@@ -5,10 +5,10 @@ const sinonChai = require('sinon-chai');
 const { expect } = chai;
 chai.use(sinonChai);
 
-const { mockListSales } = require('../mocks/mockSales');
+const { mockListSales, mockListAllSales } = require("../mocks/mockSales");
 
 const connection = require('../../../src/models/connection');
-const { salesRequisition } = require('../../../src/models/saleModel');
+const { salesRequisition, getAll } = require("../../../src/models/saleModel");
 
 describe('Test saleModel', () => {
   describe('Teste 1', () => {
@@ -18,6 +18,15 @@ describe('Test saleModel', () => {
         .resolves([{ insertId: 10 }]);
 
       await salesRequisition(mockListSales);
+    })
+  })
+   describe('Teste 2', () => {
+    it('', async () => {
+      sinon
+        .stub(connection, 'execute')
+        .resolves(mockListAllSales);
+
+      await getAll();
     })
   })
   afterEach(sinon.restore);
