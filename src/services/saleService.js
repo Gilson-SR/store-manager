@@ -14,7 +14,7 @@ const getSale = async (req) => {
 };
 
 const reqSales = async (req) => {
-  const listSales = req.body;
+  const listSales = await req.body;
   const listSalesLength = listSales && listSales.length;
   const responseValidation = await postSaleValidation(listSales, listSalesLength);
   if (responseValidation) return responseValidation;

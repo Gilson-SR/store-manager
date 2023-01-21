@@ -25,7 +25,7 @@ describe('Test saleController', () => {
       await reqSales(req, res);
 		})
   })
-  describe('Get all sales', () => {
+  describe('Test 2', () => {
     it('', async () => {
       const res = {};
       const req = {};
@@ -39,7 +39,7 @@ describe('Test saleController', () => {
       await getAllSales(req, res);
     })
   })
-	describe('Get one sale by Id', () => {
+	describe('Test 3', () => {
 		it('{', async () => {
       const res = {};
       const req = {};

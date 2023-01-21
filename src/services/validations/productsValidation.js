@@ -51,6 +51,7 @@ const postSaleValidation = (listSales, listSalesLength) => {
   if (checkExistence(listSales, listSalesLength)) return checkExistence(listSales, listSalesLength);
   if (checkValidity(listSales)) return checkValidity(listSales);
   if (checkProduct(listSales)) return checkProduct(listSales);
+  return undefined;
 };
 
 module.exports = {
