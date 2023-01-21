@@ -76,6 +76,20 @@ describe('Test productsController', () => {
         .resolves({ status: 200, response: { name: 'XXX', id: 1 } });
 
       await productsController.putProduct(req, res);
+    })
+     })
+  	describe('Test 5', () => {
+    it('', async () => {
+      const res = {};
+      const req = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'deleteProduct')
+        .resolves({ status: 204 });
+
+      await productsController.deleteProduct(req, res);
 		})
 	})
 
